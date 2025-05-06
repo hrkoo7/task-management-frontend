@@ -8,6 +8,8 @@ A responsive, real‐time task management frontend built with Next.js and Chakra
 
 Frontend: [Deployed on vercel](https://task-management-frontend-pi-taupe.vercel.app/login)
 
+Backend Repository : [github link](https://github.com/hrkoo7/task-management-backend)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
