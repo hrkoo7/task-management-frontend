@@ -5,13 +5,21 @@ import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api'; // Adjust the import based on your project structure
 import { useState, useEffect } from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
+import { useRouter } from 'next/router'; 
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth()
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
+    if (authLoading) return
+
+    if (!user) {
+      router.replace('/login');
+    }
     const fetchDashboardData = async () => {
       try {
         const { data } = await api.get('/api/tasks/dashboard');
@@ -25,11 +33,11 @@ export default function Dashboard() {
     if (user) fetchDashboardData();
   }, [user]);
 
-  if (loading) return <DashboardSkeleton />;
+  if (loading) {return <DashboardSkeleton />}
 
   return (
     <ProtectedRoute>
-      <Heading mb={8} textAlign="center">Task Dashboard</Heading>
+      <Heading mb={8} textAlign="center">Dashboard</Heading>
       <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={6} p={4}>
         <DashboardStats
           title="Assigned Tasks"

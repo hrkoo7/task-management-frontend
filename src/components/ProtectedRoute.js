@@ -11,20 +11,18 @@ export default function ProtectedRoute({ children }) {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    // once we've checked auth...
-    if (!loading) {
-      if (!user) {
-        // not logged in → redirect
-        router.replace('/login');
-      } else {
-        // logged in → render children
-        setAuthorized(true);
-      }
+    console.log('ProtectedRoute: user:', user, 'loading:', loading);
+    if (loading) return; // Wait for auth check to finish
+
+    if (!user) {
+      router.replace('/login');
+    } else {
+      setAuthorized(true);
     }
   }, [user, loading, router]);
 
   // don’t flash anything until we know
-  if (!authorized) return null;
+  if (loading || !authorized) return null;
 
   return <>{children}</>;
 }

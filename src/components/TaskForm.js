@@ -20,6 +20,7 @@ export default function TaskForm({ initialData }) {
     description: '',
     dueDate: '',
     priority: 'MEDIUM',
+    status: 'TODO',
     assignedToId: '',
   });
 
@@ -89,6 +90,18 @@ export default function TaskForm({ initialData }) {
               <option value="LOW">Low</option>
               <option value="MEDIUM">Medium</option>
               <option value="HIGH">High</option>
+            </Select>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Status</FormLabel>
+            <Select
+              name="status"
+              value={task.status}
+              onChange={handleChange}
+            >
+              <option value="DONE">DONE</option>
+              <option value="TODO">TODO</option>
+              <option value="IN_PROGRESS">PENDING</option>
             </Select>
           </FormControl>
 

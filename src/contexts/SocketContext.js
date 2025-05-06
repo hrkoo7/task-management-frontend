@@ -8,7 +8,7 @@ export const SocketProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    const newSocket = io(process.env.NEXT_PUBLIC_API_URL, {
+    const newSocket = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000', {
       withCredentials: true
     });
     
